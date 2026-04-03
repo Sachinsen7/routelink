@@ -1,0 +1,19 @@
+{
+    "name": "routelink",
+    "private": true,
+    "workspaces": [
+        "services/*"
+    ],
+    "scripts": {
+        "dev": "npm -w services/auth-service run dev",
+        "build": "npm run build --workspaces",
+        "dev:all": "powershell -ExecutionPolicy Bypass -File scripts/dev-all.ps1",
+        "install:all": "powershell -ExecutionPolicy Bypass -File scripts/install-all.ps1",
+        "format": "prettier --write .",
+        "prisma:all": "powershell -ExecutionPolicy Bypass -File scripts/prisma-all.ps1"
+    },
+    "devDependencies": {
+        "prettier": "^3.3.3",
+        "concurrently": "^9.0.1"
+    }
+}
