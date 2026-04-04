@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  SYSTEM
+}
+
+model ChatRoom {
+  id           String            @id @default(uuid())
+  routeId       String
+  routeRequestId String?
+  createdAt    DateTime          @default(now())
+  participants ChatParticipant[]
+  messages     Message[]
+
+  @@index([routeId])
+  @@index([routeRequestId])
+}
+
+model ChatParticipant {
+  id       String   @id @default(uuid())
+  roomId   String
+  userId   String
+  joinedAt DateTime @default(now())
+  room     ChatRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, userId])
+  @@index([userId])
+}
+
+model Message {
+  id        String      @id @default(uuid())
+  roomId    String
+  senderId  String
+  type      MessageType @default(TEXT)
+  content   String
+  createdAt DateTime    @default(now())
+  room      ChatRoom    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  reads     MessageRead[]
+
+  @@index([roomId, createdAt])
+  @@index([senderId])
+}
+
+model MessageRead {
+  id        String   @id @default(uuid())
+  messageId String
+  userId    String
+  readAt    DateTime @default(now())
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId])
+  @@index([userId])
+}
