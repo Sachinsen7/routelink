@@ -7,6 +7,9 @@ export const navLinks = [
 import heroImageSrc from '@/assets/screen.png'
 import showcaseImageSrc1 from '@/assets/screen1.png'
 import showcaseImageSrc2 from '@/assets/screen3.png'
+import featureImageSrc1 from '@/assets/screen4.png'
+import featureImageSrc2 from '@/assets/screen5.png'
+import featureImageSrc3 from '@/assets/screen6.png'
 
 
 export const heroAvatars = [
@@ -34,7 +37,7 @@ export const features = [
             'Traveling from Mumbai to Pune? Post your route and carry small packages to offset your travel costs instantly.',
         tone: 'gradient',
         icon: 'route',
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC7tzGSnbGxRwX28nuFN3G6xOPQmUMNUSHrCXhZvXimpBaVilTVJmZrBRHekfHEG11MzlaU0hgxvrmiU_JHvy-ICxXpDR1tfKtX0Mg0yaPowL3jHqLYi8V4Rn5mCRiGeu0wCZ5eNkoQhuuHlSCeo6iaixuGzuWIip4sL9pIBD_yEX0T80m4q3aLhw4NRtW8jqMFSIdcjZpZxFq9TT4DFuDnR98uqBhB-Kr0V8SgDy3gKqa7LfY_ZD6ADJxoeh5hIobkfof_OyduQko',
+        image: featureImageSrc1.src,
         alt: 'RouteLink tracking interface with active travel route',
         stats: ['2 mins to post a route', 'Verified handoff flow', 'Live route coordination'],
     },
@@ -45,7 +48,7 @@ export const features = [
             'Need something delivered fast? Match with someone already heading that way for same-day delivery at half the cost.',
         tone: 'secondary',
         icon: 'package',
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAi5IrZCWPBE5fexHyquPLTc3HJUmAqTQSMd_Hec3u4K8cQQiVFuh6w0V12kBGpL3DaA4D0vTLM6uTTD-KwGDHVsKXzNnfddd_y5tN5nil4uewbK8ImtaYDv1dr7Rm5X4Lj6my3qwpVg21chz6Dkx7TqFQ0Vvon1mdNJ3ScV66nONsX53UEH6R8NNS3_xwKi-WnPWkPBmNFzh6omF3R4mgygSMnYVogGEqwXzMXfEwmmOmnN2yUDWvFEcZx9WJVCbdmdQ2SM7nxrEM',
+        image: featureImageSrc2.src,
         alt: 'RouteLink package requests and pricing interface',
         stats: ['Same-day inter-city options', 'Half the courier cost', 'Cleaner booking flow'],
     },
@@ -56,7 +59,7 @@ export const features = [
             'Identity verification through DigiLocker and real-time tracking ensures your items are always in safe hands.',
         tone: 'accent',
         icon: 'shield',
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAkty9rQXQxWn2GyI8XXPs2ZA5cqlkQwzzS5o0gxXIfzrgMeX4N0RFUiOu7nuoDRQdbVsZeLBiP1hssXHjvNQK1dSzlzPN5WfPTjZAwPb7OsLOOHtqmb-HOc0sztHaEz1LC4XDQD12qGEg3CyX3wWdSeYlQPIPQjVTU_n7VanGCtQckYPhSTf4binG3J0NcEFUPIuOXPlKzt2cdLY3Yvqeion1d5OhGDZqGbC-bA927UCsc6xMJMDBc9_s5XRwjTa7uMyHl8j98pD4',
+        image: featureImageSrc3.src,
         alt: 'RouteLink verified profile and trust indicators',
         stats: ['DigiLocker backed identity', 'Transit-safe matching', 'End-to-end visibility'],
     },
