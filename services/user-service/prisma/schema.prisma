@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+model UserProfile {
+  userId     String   @id
+  name       String
+  avatarUrl  String?
+  bio        String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  reviewerId String
+  revieweeId String
+  routeId    String?
+  rating     Float
+  comment    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([reviewerId])
+  @@index([revieweeId])
+  @@index([routeId])
+}
+
+model TrustEvent {
+  id        String   @id @default(uuid())
+  userId    String
+  type      String
+  score     Float
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model UserReputation {
+  userId         String   @id
+  averageRating  Float    @default(0)
+  trustScore     Float    @default(0)
+  reviewsCount   Int      @default(0)
+  completedTrips Int      @default(0)
+  responseRate   Float    @default(0)
+  accountAgeDays Int      @default(0)
+  updatedAt      DateTime @updatedAt
+}
+
+model UserVerificationRecord {
+  id             String             @id @default(uuid())
+  userId         String
+  documentNumber String
+  provider       String
+  providerRefId  String?
+  status         VerificationStatus @default(PENDING)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([userId, status])
+}
