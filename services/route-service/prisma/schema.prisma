@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum RouteStatus {
+  ACTIVE
+  FULL
+  COMPLETED
+  CANCELLED
+}
+
+enum RouteRequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+  COMPLETED
+}
+
+enum RequestType {
+  RIDE
+  PACKAGE
+}
+
+model Route {
+  id             String        @id @default(uuid())
+  userId         String
+  fromCity       String
+  toCity         String
+  fromLat        Float
+  fromLng        Float
+  toLat          Float
+  toLng          Float
+  departureTime  DateTime
+  transportMode  String
+  seatsTotal     Int
+  seatsAvailable Int
+  price          Float
+  description    String?
+  status         RouteStatus   @default(ACTIVE)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  requests       RouteRequest[]
+
+  @@index([userId])
+  @@index([fromCity, toCity, departureTime])
+  @@index([status])
+}
+
+model RouteRequest {
+  id             String             @id @default(uuid())
+  routeId         String
+  requesterId     String
+  type            RequestType       @default(RIDE)
+  seatsRequested  Int?
+  packageSizeKg   Float?
+  message         String?
+  status          RouteRequestStatus @default(PENDING)
+  paymentRefId    String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  route           Route             @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  package         Package?
+
+  @@index([routeId, status])
+  @@index([requesterId])
+}
+
+model Package {
+  id          String       @id @default(uuid())
+  requestId   String       @unique
+  weight      Float
+  description String
+  imageUrl    String?
+  createdAt   DateTime     @default(now())
+  request     RouteRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+}
